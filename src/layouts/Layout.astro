@@ -1,3 +1,32 @@
+---
+import '../styles/global.css'
+import { ClientRouter } from "astro:transitions";
+
+const siteName = import.meta.env.PUBLIC_SITE_NAME || 'AstroSite'
+
+interface navItem{
+	name: string
+	href: string
+}
+
+const navItems: navItem[] = [
+	{ name: 'Home', href: '/' },
+    { name: 'userModelVue', href: '/userModelVue' },
+    { name: 'props', href: '/props' },
+    { name: 'ServerSide', href: '/ServerSide'},
+    { name: 'DynamicRoutes', href: '/DynamicRoutes' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Picture', href: '/picture'},
+	{ name: 'About', href: '/about'},
+	{ name: 'Dowload', href: '/dowload' },
+	{ name: 'Error404', href: '/404' }
+]
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+
+const copyrightYear = new Date().getFullYear()
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,17 +35,57 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+        <ClientRouter />
 	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+	<body class="flex min-h-screen">
+        
+        <aside class="w-64 bg-gray-800 text-white flex flex-col shadow-2xl sticky top-0 h-screen">
+            
+            <div class="p-4 text-2xl font-extrabold text-blue-400 border-b border-gray-700">
+                {siteName}
+            </div>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+            <nav class="flex-grow p-4 space-y-2">
+                {navItems.map((item) => {
+                    const itemHref = item.href.replace(/\/$/, '') || '/';
+                    const isActive = itemHref === currentPath;
+
+                    const linkClasses = isActive
+                        ? "flex items-center space-x-3 p-3 rounded-lg text-white bg-blue-600 font-bold transition duration-150 shadow-md"
+                        : "flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition duration-150 text-gray-300 hover:text-white";
+
+                    return (
+                        <a 
+                            href={item.href} 
+                            class={linkClasses}
+                            aria-current={isActive ? 'page' : undefined}
+                        >
+                            <span class="link-text">{item.name}</span>
+                        </a>
+                    );
+                })}
+            </nav>
+
+            <div class="p-4 border-t border-gray-700 text-xs text-gray-500">
+                <p>Astro App</p>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            
+            <header class="bg-white shadow-md p-4 sticky top-0 z-0">
+                <span class="text-sm text-gray-500">Welcome to {siteName}</span>
+            </header>
+
+            <main class="flex-grow max-w-7xl mx-auto w-full p-6">
+                <slot />
+            </main>
+
+            <footer class="bg-gray-200 text-center text-gray-600 py-3 mt-auto border-t">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <p>&copy; {copyrightYear} {siteName}. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

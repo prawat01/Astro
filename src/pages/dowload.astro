@@ -1,0 +1,30 @@
+---
+// 1. Import your layout component
+import '../styles/global.css'
+import Layout from '../layouts/Layout.astro'
+
+// You can define other variables here if needed
+---
+<Layout>
+    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
+        
+        <h1 class="text-5xl font-extrabold text-gray-800 mb-6">Download</h1>
+        <p class="text-lg text-gray-600 mb-10">Get the latest version of our software below.</p>
+
+        <a 
+            href="https://example.com" 
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-xl transition duration-300 transform hover:scale-105 inline-block text-xl tracking-wide mb-6"
+            target="_blank" 
+            rel="noopener noreferrer"
+        >
+            🚀 Click Download
+        </a>
+
+        <a 
+            href="/" 
+            class="text-blue-600 hover:text-blue-800 font-medium py-2 px-4 transition duration-300 mt-4"
+        >
+            ← Back Home
+        </a>
+    </div>
+</Layout>

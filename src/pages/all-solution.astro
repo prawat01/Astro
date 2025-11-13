@@ -1,0 +1,135 @@
+---
+
+const siteName = import.meta.env.PUBLIC_SITE_NAME
+const curDay = new Date().getUTCDate()
+const currentYear = new Date().getFullYear()
+
+interface navItem{
+	name: string
+	href: string
+}
+
+const navItems: navItem[] = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Blog', href: '/blog' },
+	{ name: 'About', href: '/about'},
+	{ name: 'Dowload', href: '/dowload' },
+	{ name: 'Error404', href: '/404' }
+]
+
+const htmlText = '<p style="color: green;"><i><b><u>test show tag element</u></b></i></p>'
+
+
+
+const a = 2
+const b = 4
+
+const list: string[] = ["a", "b", "c"]
+
+const showFoo: boolean = true
+const showBar: boolean = false
+
+const ElementName = 'h1'
+
+const contentHtml = `<p style="color: red;">Content</p>`
+
+
+---
+
+
+
+<!-- Expression -->
+<p>{a} + {b} = {a + b}</p>
+<p>{list.join(", ")}</p>
+
+<!-- List -->
+<ul>
+  {list.map((item) => <li>{item}</li>)}
+</ul>
+
+<!-- Conditional -->
+{showFoo && <p>Foo</p>}
+{showBar ? <p>Bar</p> : <p style="font-style: italic;">Hidden Bar</p>}
+
+<!-- Dynamic Element -->
+<ElementName>Text</ElementName>
+
+<!-- Raw HTML -->
+<div set:html={contentHtml}></div>
+<!-- <div dangerously-set-innerHTML={contentHtml}></div> -->
+
+
+<nav>
+	<ul>
+		{navItems.map((item) => <li><a href={item.href}>{item.name}</a></li>)}
+	</ul>
+</nav>
+
+<h1>Homepage: {siteName}</h1>
+
+<p>Description: {import.meta.env.PUBLIC_SITE_DESCRIPTION}</p>
+
+<p>New astro first create</p>
+
+<p>2 + 3 = {2+3}</p>
+
+<p>Date: {curDay}</p>
+
+<h1>{htmlText}</h1>
+<h1 set:html={htmlText}></h1> <!--การใช้แบบนี้ต้องระวังเรื่องการโจมตี XSS-->
+
+
+
+<p>Copyright {currentYear}</p>
+
+
+*****************************************
+index.astero
+---
+import '../styles/global.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const isActive = true
+const btnClasses = ['btn', 'btn-primary']
+---
+
+<h1>Test CSS TEXT</h1>
+<button class="btn btn-primary">Button</button>
+
+<!-- แสดงผลเป็น class="btn btn-primary active" -->
+<button class:list={[btnClasses, { 'active': isActive }]}>Button</button>
+
+<style>
+/* for local scopes */
+h1 {
+  color: red;
+}
+</style>
+
+*****************************************
+---
+// JavaScript (Server-side)
+import { randomBytes } from 'node:crypto'
+
+const token = randomBytes(16).toString('hex')
+---
+
+<!-- HTML -->
+<p>{token}</p>
+<button id="btn">Click me (processed)</button>
+<button onclick="testAlert()">Click me (inline)</button>
+
+<!-- JavaScript (Client-side processed) -->
+<script>
+  import confetti from "canvas-confetti"
+    document.getElementById('btn')?.addEventListener('click', () => {
+    confetti()
+  })
+</script>
+
+<!-- JavaScript (Client-side inline) -->
+<script is:inline>
+  function testAlert() {
+    alert('Hello, world!')
+  }
+</script>

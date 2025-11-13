@@ -1,0 +1,29 @@
+---
+// JavaScript (Server-side)
+import { randomBytes } from 'node:crypto'
+import Layout from '../layouts/Layout.astro'
+
+const token = randomBytes(16).toString('hex')
+---
+
+<Layout>
+ <!-- HTML -->
+<p>{token}</p>
+<button id="btn">Click me (processed)</button>
+<button onclick="testAlert()">Click me (inline)</button>
+</Layout>
+<!-- JavaScript (Client-side processed) -->
+<script>
+  import confetti from "canvas-confetti"
+    document.getElementById('btn')?.addEventListener('click', () => {
+    confetti()
+  })
+</script>
+
+<!-- JavaScript (Client-side inline) -->
+<script is:inline>
+  function testAlert() {
+    alert('Hello, world!')
+  }
+</script>
+

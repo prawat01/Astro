@@ -1,0 +1,16 @@
+---
+import '../styles/global.css'
+import Cat from '../assets/images_pic_test.jpg'
+import Layout from '../layouts/Layout.astro'
+import { Image } from 'astro:assets'
+//ติดตั้ง pnpm i sharp
+//บิ้ว pnpm build
+
+---
+
+<Layout>
+    
+    <Image src={Cat} alt=""></Image>
+    <Image src={Cat} alt="" width="100"></Image>
+
+</Layout>

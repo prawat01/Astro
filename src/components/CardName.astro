@@ -1,0 +1,21 @@
+---
+interface Props {
+    name: string;
+    description: string;
+    tags?: string[];    
+}
+
+const { name, description, tags } = Astro.props
+---
+
+<div class="border border-blue-500 shadow-lg p-4 rounded mb-2">
+    <h1 class="text-1xl font-bold text-amber-600 mb-3">{Astro.props.name}</h1>
+    <p>{Astro.props.description}</p>
+    {tags && (
+        <ul class="flex gap-2 mt-3">
+            {tags.map((tag) => (
+                <li class="bg-emerald-300 px-2 rounded">{tag}</li>
+            ))}
+        </ul>
+    )}
+</div>
