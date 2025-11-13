@@ -1,0 +1,105 @@
+---
+import '../../styles/global.css'
+import Layout from '../../layouts/Layout.astro'
+import type { GetStaticPaths } from "astro";
+
+interface Props {
+    products: {
+        id: number;
+        title: string;
+        description: string;
+        category: string;
+        price: number;
+        discountPercentage: number;
+        rating: number;
+        stock: number;
+        tags: string[];
+        brand: string;
+        sku: string;
+        weight: number;
+        dimensions: {
+            width: number;
+            height: number;
+            depth: number;
+        };
+        warrantyInformation: string;
+        shippingInformation: string;
+        availabilityStatus: string;
+        reviews: {
+            rating: number;
+            comment: string;
+            reviewerName: string;
+        }[];
+    }[];
+    total: number;
+    skip: number;
+    limit: number;
+}
+
+interface DummyjasonProductResponse {
+    products: {
+        id: number;
+        title: string;
+        description: string;
+        category: string;
+        price: number;
+        discountPercentage: number;
+        rating: number;
+        stock: number;
+        tags: string[];
+        brand: string;
+        sku: string;
+        weight: number;
+        dimensions: {
+            width: number;
+            height: number;
+            depth: number;
+        };
+        warrantyInformation: string;
+        shippingInformation: string;
+        availabilityStatus: string;
+        reviews: {
+            rating: number;
+            comment: string;
+            reviewerName: string;
+        }[];
+    }[];
+    total: number;
+    skip: number;
+    limit: number;
+}
+
+export const getStaticPaths = (async() => {
+    const res = await fetch('https://dummyjson.com/products?limit=0')
+    const data = await res.json() as DummyjasonProductResponse
+    return data.products.map(product => ({
+        params: { id: product.id },
+        props: { product }
+    }))
+}) satisfies GetStaticPaths;
+
+const { product } = Astro.props;
+
+---
+
+<layout>
+    <h1>{product.title}</h1>
+    <p>{product.description}</p>
+    <p>{product.category}</p>
+    <p>{product.price}</p>
+    <p>{product.discountPercentage}</p>
+    <p>{product.rating}</p>
+    <p>{product.stock}</p>
+    <p>{product.brand}</p>
+    <p>{product.sku}</p>
+    <p>{product.weight}</p>
+    <p>{product.dimensions.width}</p>
+    <p>{product.dimensions.height}</p>
+    <p>{product.dimensions.depth}</p>
+    <p>{product.warrantyInformation}</p>
+    <p>{product.shippingInformation}</p>
+    <p>{product.availabilityStatus}</p>
+    <p>{product.reviews.rating}</p>
+    <p>{product.reviews.comment}</p>
+    <p>{product.reviews.reviewerName}</p>
+</layout>

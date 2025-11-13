@@ -1,0 +1,31 @@
+---
+import '../../styles/global.css'
+import Layout from '../../layouts/Layout.astro'
+import type { GetStaticPaths } from "astro";
+
+interface Props {
+    name: string;
+    description: string;
+    year: number;
+}
+
+export const getStaticPaths = (() => {
+    return [
+        { params: { slug: 'react' }, props: { name: 'React', description: 'A JavaScript library for building user interfaces', year: 2013 }},
+        { params: { slug: 'vue' }, props: { name: 'Vue', description: 'A progressive JavaScript framework', year: 2014 }},
+        { params: { slug: 'angular' }, props: { name: 'Angular', description: 'A TypeScript-based open-source web application framework led by the Angular Team', year: 2016 }}
+    ];
+}) satisfies GetStaticPaths;
+
+const { name, description, year } = Astro.props;
+
+---
+
+<Layout>
+    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-3xl mx-auto border border-gray-200 text-center">
+        <h1 class="text-5xl font-extrabold text-gray-800 mb-4 tracking-tight">{name}</h1>
+        <p class="text-xl text-gray-600 mb-6 leading-relaxed">{description}</p>
+        <p class="text-lg text-gray-500">First released in <span class="font-bold text-gray-700">{year}</span></p>
+    </div>
+</Layout>
+
