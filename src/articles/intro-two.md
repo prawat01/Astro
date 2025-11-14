@@ -1,7 +1,7 @@
 ---
 slug: "intro-two"
 title: "Introduction to Astro sharp Two"
-createed_at: "2023-03-04"
+created_at: "2023-03-04"
 ---
 
 

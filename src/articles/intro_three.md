@@ -1,7 +1,7 @@
 ---
 slug: "intro-three"
 title: "Introduction to Astro circle Three"
-createed_at: "2023-05-15"
+created_at: "2023-05-15"
 ---
 
 *Italic text* or _Italic text_

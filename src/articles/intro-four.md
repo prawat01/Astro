@@ -1,7 +1,7 @@
 ---
-slug: "intro-one"
-title: "Introduction to Astro"
-created_at: "2023-01-01"
+slug: "intro-fourone"
+title: "Introduction to Astro for new"
+created_at: "2023-06-01"
 ---
 
 *Italic text* or _Italic text_

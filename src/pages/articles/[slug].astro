@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro"
+
+export async function getStaticPaths() {
+    const articles = await Astro.glob('../../articles/*.md');
+
+    return articles.map(article => ({
+        params: { slug: article.file.split('/').pop()?.replace('.md', '') },
+        props: { article }
+    }));
+}
+
+const { article } = Astro.props;
+const { Content } = article;
+---
+
+<Layout title={article.frontmatter.title}>
+    <a href="/articles" class="text-blue-600 hover:text-blue-800 font-medium inline-block border-b border-blue-600">
+        Back Home
+    </a>
+    <div class="bg-white dark:bg-gray-600 shadow-xl p-6 rounded-lg my-6 mx-auto max-w-3xl">
+        <h1 class="text-2xl font-bold mb-4">
+            {article.frontmatter.title}
+        </h1>
+        <Content />
+    </div>
+</Layout>

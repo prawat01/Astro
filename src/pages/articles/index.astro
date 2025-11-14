@@ -1,0 +1,46 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import { basename } from 'node:path';
+
+// Astro.glob is the recommended way to fetch local files. It provides more metadata like the URL.
+const articles = await Astro.glob('../../articles/*.md');
+
+// Sort articles by creation date, newest first
+articles.sort((a, b) => new Date(b.frontmatter.created_at).valueOf() - new Date(a.frontmatter.created_at).valueOf());
+
+// Helper function to get the slug from the file path
+const getSlug = (file: string) => basename(file, '.md');
+
+// Helper function to format the date string for better readability
+const formatDate = (dateString: string | Date) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+};
+
+---
+
+<Layout title="Articles">
+    <div class="bg-white dark:bg-gray-800 shadow-xl p-6 rounded-lg my-6 mx-auto max-w-3xl">
+        <h1 class="text-2xl font-bold mb-4">
+            Articles
+        </h1>
+        <ul class="list-disc pl-6 mt-4 space-y-2">
+            {articles.map((article) => (
+                <li class="text-gray-700 dark:text-gray-300 flex justify-between items-center">
+                    <div>
+                        <a href={`/articles/${getSlug(article.file)}`} class="text-blue-600 dark:text-blue-400 hover:underline">
+                            {article.frontmatter.title}
+                        </a>
+                    </div>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">
+                        {formatDate(article.frontmatter.created_at)}
+                    </span>
+                </li>
+            ))}
+        </ul>
+    </div>
+    
+</Layout>
