@@ -1,0 +1,40 @@
+[
+    {
+        "id": 1,
+        "slug": "Cat",
+        "name": "Cat",
+        "description": "a cat is smallest to box",
+        "price": 28.9
+    },
+    {
+        "id": 2,
+        "slug": "Dog",
+        "name": "Dog",
+        "description": "a Dog is Bigest to Tail",
+        "price": 45.3
+    },
+    {
+        "id": 3,
+        "slug": "Bird",
+        "name": "Bird",
+        "description": "a Bird is more paper",
+        "price": 20.5,
+        "ishide": true
+
+    },
+    {
+        "id": 4,
+        "slug": "Sneck",
+        "name": "Sneck",
+        "description": "a Sneck is cover to Tree",
+        "price": 65.7
+
+    },
+    {
+        "id": 5,
+        "slug": "Crow",
+        "name": "Crow",
+        "description": "a Crow is flyer Tower",
+        "price": 45.3
+    },
+]
