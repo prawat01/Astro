@@ -36,5 +36,21 @@
         "name": "Crow",
         "description": "a Crow is flyer Tower",
         "price": 45.3
+    },
+    {
+        "id": 6,
+        "slug": "Chang",
+        "name": "Chang",
+        "description": "a Chang is Biger morethan",
+        "price": 45.3,
+        "ishide": true
+    }
+    ,
+    {
+        "id": 7,
+        "slug": "Bee",
+        "name": "Bee",
+        "description": "a Bee is flyer Folower",
+        "price": 45.3
     }
 ]
